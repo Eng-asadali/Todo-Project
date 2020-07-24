@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Todo</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="text-center">
+    <p >
     {% if request.user.is_authenticated %}
         Hello {{ request.user.username }}
     {% else %}
         Hello anonymous user
     {% endif %}
-    <a href="/create">create a todo</a>
-    <ul>
+    </p>
+    <a class="btn btn-primary" href="/create">create a todo</a>
+        </div>
+    <div class="col-4 offset-4">
     {% for todo in todo_list  %}
-        <li><a href="/{{todo.id}}">{{todo.name}} </a> , it's due {{ todo.due_date}}</li>
+        <div class="card mt-3">
+            <div class="card-header">
+               <a href="/{{todo.id}}"> <h4>{{todo.name}}</h4></a>
+            </div>
+            <div class="card-body">
+                <p> It's due {{ todo.due_date}} </p>
+            </div>
+
+        </div>
     {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+{% endblock %}
